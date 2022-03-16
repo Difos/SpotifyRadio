@@ -7,10 +7,12 @@
   "scripts": {
     "start": "node server/index.js",
     "live-reload": "nodemon server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache",
+    "test:watch":"set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --watchAll",
+    "test:coverage":"set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --coverage tests/unit"
   },
   "engines": {
-    "node": "17"
+    "node": "14.x"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,8 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
     "pino": "^7.8.0",
     "pino-pretty": "^7.5.3"
   }

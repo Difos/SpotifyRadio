@@ -9,7 +9,8 @@
     "live-reload": "nodemon server/index.js",
     "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache",
     "test:watch":"set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --watchAll",
-    "test:coverage":"set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --coverage tests/unit"
+    "test:coverage":"set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --coverage tests/unit",
+    "live-reload:docker":"docker-compose up live-reload"
   },
   "engines": {
     "node": "14.x"

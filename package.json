@@ -8,12 +8,12 @@
     "start": "node server/index.js",
     "live-reload": "nodemon server/index.js",
     "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache",
-    "test:watch":"set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --watchAll",
-    "test:coverage":"set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --coverage tests/unit",
-    "live-reload:docker":"docker-compose up live-reload"
+    "test:watch": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --watchAll",
+    "test:coverage": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --coverage tests/unit",
+    "live-reload:docker": "docker-compose up --build live-reload"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,9 @@
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
     "pino": "^7.8.0",
-    "pino-pretty": "^7.5.3"
+    "pino-pretty": "^7.5.3",
+    "stream": "0.0.2",
+    "stream-promise": "^3.2.0",
+    "throttle": "^1.0.3"
   }
 }

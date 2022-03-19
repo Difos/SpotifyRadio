@@ -31,13 +31,14 @@ export class Service {
     this.throttleTransform = {},
     this.currentReadable = {}
 
-    this.startStream()
+    this.startStream();
   }
 
   createClientStream(){
     const id = randomUUID()
     const clientStream = new PassThrough()
-    this.clientStream.set(id,clientStreams)
+    this.clientStreams.set(id, clientStream)
+
     return {
       id,
       clientStream
@@ -55,8 +56,8 @@ export class Service {
   async getBitRate(song){
     try{
       const args = [
-        '--i', //info
-        '-B',
+        '--i', // info
+        '-B', // bitrate
         song
       ]
 
@@ -73,6 +74,8 @@ export class Service {
 
       const [success,error] = [stdout,stderr].map(stream => stream.read())
       if(error) return await Promise.reject(error)
+
+      console.log(`deu ruim no sucess ${success.toString()}`)
 
       return success
         .toString()
@@ -106,15 +109,18 @@ export class Service {
   async startStream(){
 
     logger.info(`starting with ${this.currentSong}`)
-    const bitRate = this.currentBitRate = (await this.getBitRate(this.currentSong))/bitRateDivisor
+    const bitRate = this.currentBitRate = (await this.getBitRate(this.currentSong)) / bitRateDivisor
     const throttleTransform = this.throttleTransform = new Throttle(bitRate)
     const songReadable = this.currentReadable = this.createFileStream(this.currentSong)
-
     return streamsPromises.pipeline(
       songReadable,
       throttleTransform,
       this.broadCast()
     )
+  }
+
+  stopStream(){
+    return throttleTransform?.end?.()
   }
 
   createFileStream(filename) {

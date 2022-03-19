@@ -10,6 +10,26 @@ export class Controller {
         return this.service.getFileStream(filename)
     }
 
+    async handleCommand({command}){
+        logger.info(`command received:${command}`)
+        const cmd = command.toLowerCase()
+        const result = {
+            result:'ok'
+        }
+
+        if(cmd.include('start')){
+            this.service.startStream()
+            return result
+        }
+
+        if(cmd.include('stop')){
+            this.service.stopStream()
+            return result
+        }
+
+        return this.service.startStream()
+    }
+
     createClientStream(){
         const {
             id,

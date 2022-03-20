@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node server/index.js",
     "live-reload": "nodemon server/index.js",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache",
-    "test:watch": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --watchAll",
+    "test": "set LOG_DISABLED=true && set NODE_OPTIONS=--experimental-vm-modules --no-warnings && jest--no-cache",
+    "test:watch": "set LOG_DISABLED=true && set NODE_OPTIONS=--experimental-vm-modules --no-warnings && jest --no-cache",
     "test:coverage": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache --coverage tests/unit",
     "test:e2e": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --runInBand --no-cache tests/e2e",
     "live-reload:docker": "docker-compose up --build live-reload",
@@ -23,13 +23,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "portfinder": "^1.0.28",
     "supertest": "^6.2.2"
   },
   "dependencies": {
     "@types/jest": "^27.4.1",
-    "jest": "^27.5.1",
     "pino": "^7.8.0",
     "pino-pretty": "^7.5.3",
     "stream": "0.0.2",
